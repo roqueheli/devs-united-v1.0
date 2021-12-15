@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    width: 33.33%;
+    height: 3rem;
+}
+
+.header_subcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+}
+
+.header_avatar {
+    width: 2.3rem;
+    border-radius: 10rem;
+    cursor: pointer;
+}
+
+.header_title {
+    width: 7rem;
+}
+
+.empty_header_ {
+    width: 33.33%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.empty_header_ img {
+    cursor: pointer;
+    margin-left: 1.5rem;
+}
+
+.logout_header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 33.33%;
+    height: 3rem;
+    padding-right: 1rem;
+}
+
+.logout_header_button {
+    color: white;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;
+    font-family: 'Fira Code';
+    font-style: normal;
+    font-weight: normal;
+    border-radius: 0px;
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+}
+
+.header_agrupation {
+    display: flex;
+}
+
+.logout_header_button:active {
+    background-color: #914D8B;
+}
+
+.fa-sign-out {
+    margin-left: .3rem;
+}

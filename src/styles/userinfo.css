@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Fira+Mono:wght@400;500;700&display=swap');
+
+.tweetBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 14rem;
+    background: #150714;
+}
+
+.tweetbox__ {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}
+
+.tweetbox__ img {
+    border-radius: 10rem;
+}
+
+.tweetbox__ h3 {
+    font-family: 'Silkscreen';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 24px;
+}
+
+.userinfo_ {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 10rem;
+}
+
+.userinfo_ button {
+    font-family: 'Silkscreen';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.333333px;
+    width: 17rem;
+    border: none;
+    cursor: pointer;
+}
+
+.button1 {
+    background: #60265B;
+    color: #150714;
+}
+
+.button2 {
+    color: #60265B;
+    background: transparent;
+}

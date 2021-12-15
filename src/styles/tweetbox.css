@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Fira+Mono:wght@400;500;700&display=swap');
+
+.tweetBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10rem;
+    background: #150714;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 34%;
+}
+
+.tweetbox__input {
+    display: flex;
+    height: 8rem;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tweetbox_avatar,
+.tweetbox_textarea {
+    height: 100%;
+}
+
+.tweetbox_textarea {
+    width: 80%;
+}
+
+.tweetbox_textarea textarea {
+    height: 80%;
+    width: 100%;
+    background: #2F112D;
+    font-family: 'Fira Code';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 26px;
+    letter-spacing: -0.333333px;
+    color: #914D8B;
+    border: none;
+    padding: 0 15px 0 10px;
+    overflow: hidden;
+    margin-bottom: -0.2rem;
+}
+
+.tweetbox_avatar {
+    padding: 1rem;
+}
+
+.tweetbox__input img {
+    margin-left: 1rem;
+    width: 3.5rem;
+    border-radius: 10rem;
+}
+
+.tweet_post .tweetBox__tweetButton {
+    background: #2F112D;
+    font-family: 'Silkscreen';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.333333px;
+    color: #150714;
+    width: 15%;
+    border: none;
+}
+
+.tweet_post .tweetBox__tweetButton:active {
+    background: #F50D5A;
+}
+
+.tweet_post {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tweetbox_counters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.tweetbox_counters .words_counters {
+    font-family: 'Fira Mono';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.333333px;
+    color: #FFFFFF;
+}
+
+.tweetbox_counters .words_max {
+    font-family: 'Fira Code';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: right;
+    letter-spacing: -0.333333px;
+    color: #F50D5A;
+}
+
+.progress_bar {
+    background: #00DA76;
+    height: .2rem;
+}

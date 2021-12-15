@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+.header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    width: 33.33%;
+    height: 3rem;
+}
+
+.header_subcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+}
+
+.header_avatar {
+    width: 2.3rem;
+    border-radius: 10rem;
+    cursor: pointer;
+}
+
+.empty_header {
+    width: 33.33%;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.empty_header img {
+    width: 1.8rem;
+    padding-right: 1rem;
+}
+
+.logout_header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 33.33%;
+    height: 3rem;
+    padding-right: 1rem;
+}
+
+.logout_header_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Silkscreen';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    padding: .2rem;
+    color: #000000;
+    line-height: 16px;
+    height: 1.5rem;
+    background: #F50D5A;
+    border-style: none;
+    cursor: pointer;
+}
+
+.header_agrupation {
+    display: flex;
+    align-items: center;
+}
+
+.logout_header_button:active {
+    background-color: #914D8B;
+}
+
+.fa-sign-out {
+    margin-left: .3rem;
+}
+
+.nickname_style {
+    font-family: 'Silkscreen';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;   
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
