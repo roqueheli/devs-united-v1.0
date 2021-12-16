@@ -183,6 +183,7 @@ body {
       border-radius: 0px;
       background-color: transparent;
       border-style: none;
+      cursor: pointer;
 }
 
 .login_subcontainer .logout_button:active {

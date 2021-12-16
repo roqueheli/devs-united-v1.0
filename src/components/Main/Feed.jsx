@@ -1,19 +1,21 @@
 import React, { useContext } from 'react';
 import { firestore } from '../../firebase/firebase';
 import { FirestoreContext } from '../../context/firestoreContext';
+import { useHistory } from "react-router-dom";
 import '../../styles/feed.css';
 
 function Feed() {
     const images = require.context('../../../public/images', true);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const { user, message, setMessage, setLike } = useContext(FirestoreContext);
+    const { user, message, setMessage, setLike, setUserFeed } = useContext(FirestoreContext);
+    const messageOrdered = message.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
+    const history = useHistory();
 
     const deleteTweet = (id) => {
         const newTweets = message.filter((tweet) => tweet.id !== id);
         setMessage(newTweets);
         firestore.doc(`tweets/${id}`).delete();
-    }
-    
+    }    
     
     const likeTweet = (id, numLikes, like, uid) => {
         if ( !numLikes ) numLikes = 0;
@@ -22,13 +24,18 @@ function Feed() {
         like === true ? firestore.doc(`tweets/${id}`).update({ likes : numLikes - 1 }) : firestore.doc(`tweets/${id}`).update({ likes : numLikes + 1 });
     }
 
+    const handleUserFeed = (userfeedtweet) => {
+      setUserFeed(userfeedtweet);
+      history.push('/userfeed');
+    }
+
     return (
-        <div className="post_container">
-          {message.map((tweet, index) => {
+      <div className="post_container">
+          {messageOrdered.map((tweet, index) => {
             return (
               <div key={index}>
                 <div className="post">
-                  <div className="post__avatar">
+                  <div onClick={() => handleUserFeed(tweet)} className="post__avatar">
                     <img src={tweet.photoURL} alt="" />
                   </div>
                   <div className="post__body">

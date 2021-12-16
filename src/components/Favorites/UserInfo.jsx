@@ -26,8 +26,8 @@ function UserInfo() {
         <h3 style={{ background: `${color.hex}`}}>{nickname.toLowerCase()}</h3>
       </div>
       <div className="userinfo_">
-          <button onClick={handleButtonPosts} className={button === false ? 'button1' : 'button2'}>POSTS</button>
-          <button onClick={handleButtonFavorites} className={button === true ? 'button1' : 'button2'}>FAVORITES</button>
+          <button onClick={handleButtonPosts} className={!button ? 'button1' : 'button2'}>POSTS</button>
+          <button onClick={handleButtonFavorites} className={button ? 'button1' : 'button2'}>FAVORITES</button>
       </div>
     </nav>
     )

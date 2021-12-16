@@ -8,7 +8,8 @@ export default function FirestoreProvider({ children }) {
     const [favorites, setFavorites] = useState([]);
     const [color, setColor] = useState({});
     const [nickname, setNickname] = useState("");
-    const [ button, setButton ] = useState(false);
+    const [userfeed, setUserFeed] = useState("");
+    const [button, setButton] = useState(false);
     const [user, setUser] = useState(null);
     const [like, setLike] = useState(false);
     const [tweet, setTweet] = useState({
@@ -55,7 +56,7 @@ export default function FirestoreProvider({ children }) {
     }, []);
 
   return (
-    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like, setLike, button, setButton, favorites, setFavorites } }>
+    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like, setLike, button, setButton, favorites, setFavorites, userfeed, setUserFeed } }>
       {children}
     </FirestoreContext.Provider>
   );

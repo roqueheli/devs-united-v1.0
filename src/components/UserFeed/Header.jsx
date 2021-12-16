@@ -4,11 +4,11 @@ import { logout } from '../../firebase/firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
-import '../../styles/header.css';
+import '../../styles/favheader.css';
 
 function Header() {
     const images = require.context('../../../public/images', true);
-    const { user, color, setColor } = useContext(FirestoreContext);
+    const { nickname } = useContext(FirestoreContext);
     const history = useHistory();
 
     const handleLogout = (e) => {
@@ -17,20 +17,13 @@ function Header() {
         history.push('/');
     }
 
-    const handleBack = (e) => {
-        e.preventDefault();
-        setColor("");
-        history.push('/');
-    }
-
     return (
         <header className="header_agrupation">
-            <div onClick={handleBack} className="empty_header_">
+            <div onClick={() => history.push('/main')} className="empty_header">
                 <img src={images('./back.svg').default} alt="" />
             </div>
             <div className="header_container">
-                <img onClick={() => history.push('/favorites')} className="header_avatar" style={{ border: `2px solid ${color.hex}`}} src={user.photoURL} alt="" />
-                <img src={images('./logo_small.svg').default} alt="" />
+                <h3 className="nickname_style">{nickname.toLowerCase()}</h3>
                 <img className="header_title" src={images('./title.svg').default} alt="" />
             </div>
             <div className="logout_header">

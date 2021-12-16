@@ -1,13 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { firestore } from '../../firebase/firebase';
 import { FirestoreContext } from '../../context/firestoreContext';
 import '../../styles/feed.css';
 
-function Selections() {
+function UserFeed() {
     const images = require.context('../../../public/images', true);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const { user, message, setMessage, setLike, favorites, setButton, setFavorites } = useContext(FirestoreContext);
-    const messageOrdered = favorites.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
+    const { user, message, setMessage, setLike, userfeed } = useContext(FirestoreContext);
+    const userPosts = message.filter(({ uid }) => uid === userfeed.uid);
+    const messageOrdered = userPosts.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
 
     const deleteTweet = (id) => {
         const newTweets = message.filter((tweet) => tweet.id !== id);
@@ -21,12 +22,6 @@ function Selections() {
         setLike(like)
         like === true ? firestore.doc(`tweets/${id}`).update({ likes : numLikes - 1 }) : firestore.doc(`tweets/${id}`).update({ likes : numLikes + 1 });
     }
-
-    useEffect(() => {
-      setButton(false);
-      const messagePosts = message.filter(({ uid }) => uid === user.uid);
-      setFavorites(messagePosts);
-    }, []);
 
     return (
         <div className="post_container">
@@ -62,4 +57,4 @@ function Selections() {
     )
 }
 
-export default Selections;
+export default UserFeed;
