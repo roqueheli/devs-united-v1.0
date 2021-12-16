@@ -20,7 +20,7 @@ function Header() {
     const handleBack = (e) => {
         e.preventDefault();
         setColor("");
-        history.push('/');
+        history.goBack();
     }
 
     return (
