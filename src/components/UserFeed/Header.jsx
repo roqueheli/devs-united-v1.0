@@ -19,7 +19,7 @@ function Header() {
 
     return (
         <header className="header_agrupation">
-            <div onClick={() => history.push('/main')} className="empty_header">
+            <div onClick={() => history.push('/favorites')} className="empty_header">
                 <img src={images('./back.svg').default} alt="" />
             </div>
             <div className="header_container">
