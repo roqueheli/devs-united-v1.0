@@ -20,13 +20,13 @@ function Header() {
     const handleBack = (e) => {
         e.preventDefault();
         setColor("");
-        history.goBack();
+        history.push('/');
     }
 
     return (
         <header className="header_agrupation">
-            <div onClick={handleBack} className="empty_header_">
-                <img src={images('./back.svg').default} alt="" />
+            <div className="empty_header_">
+                <img onClick={handleBack} src={images('./back.svg').default} alt="" />
             </div>
             <div className="header_container">
                 <img onClick={() => history.push('/favorites')} className="header_avatar" style={{ border: `2px solid ${color.hex}`}} src={user.photoURL} alt="" />

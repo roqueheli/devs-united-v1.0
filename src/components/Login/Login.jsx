@@ -23,6 +23,10 @@ function Login() {
         };
     }
     
+    // useEffect(() => {
+    //     logout();
+    // }, []);
+
     return (
         <div className="login_container">
             <div className="left">
