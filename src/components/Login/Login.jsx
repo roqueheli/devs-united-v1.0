@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { loginGoogle, logout } from '../../firebase/firebase';
 import { FirestoreContext } from '../../context/firestoreContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,6 +22,10 @@ function Login() {
             history.push('/main')
         };
     }
+
+    useEffect(() => {
+        logout();
+    }, []);
     
     return (
         <div className="login_container">
