@@ -22,10 +22,6 @@ function Login() {
             history.push('/main')
         };
     }
-
-    useEffect(() => {
-        logout();
-    }, []);
     
     return (
         <div className="login_container">
