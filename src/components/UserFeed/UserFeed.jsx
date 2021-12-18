@@ -1,27 +1,13 @@
 import React, { useContext } from 'react';
-import { firestore } from '../../firebase/firebase';
 import { FirestoreContext } from '../../context/firestoreContext';
 import '../../styles/feed.css';
 
 function UserFeed() {
     const images = require.context('../../../public/images', true);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const { user, message, setMessage, setLike, userfeed } = useContext(FirestoreContext);
+    const { user, message, like, userfeed, likeTweet, deleteTweet } = useContext(FirestoreContext);
     const userPosts = message.filter(({ uid }) => uid === userfeed.uid);
     const messageOrdered = userPosts.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
-
-    const deleteTweet = (id) => {
-        const newTweets = message.filter((tweet) => tweet.id !== id);
-        setMessage(newTweets);
-        firestore.doc(`tweets/${id}`).delete();
-    }
-    
-    const likeTweet = (id, numLikes, like, uid) => {
-        if ( !numLikes ) numLikes = 0;
-        firestore.doc(`tweets/${id}`).update({ like : !like });
-        setLike(like)
-        like === true ? firestore.doc(`tweets/${id}`).update({ likes : numLikes - 1 }) : firestore.doc(`tweets/${id}`).update({ likes : numLikes + 1 });
-    }
 
     return (
         <div className="post_container">
@@ -42,7 +28,7 @@ function UserFeed() {
                         <p>{tweet.tweet}</p>
                       </div>
                     </div>
-                    <span className="span_img" onClick={() => likeTweet(tweet.id, tweet.likes, tweet.like, tweet.uid)}><img src={tweet.likes ? images('./like.svg').default : images('./nlike.svg').default} alt="" />{tweet.likes ? tweet.likes : 0}</span>
+                    <span className="span_img" onClick={() => likeTweet(tweet.id, tweet.likes, tweet.uid)}><img src={like === "" ? images('./like.svg').default : images('./nlike.svg').default} alt="" />{tweet.likes ? tweet.likes : 0}</span>
                   </div>
                   <div className="delete_box">
                       {tweet.uid === user.uid ?

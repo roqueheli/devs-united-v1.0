@@ -7,7 +7,7 @@ import '../../styles/feed.css';
 function Selections() {
     const images = require.context('../../../public/images', true);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const { user, message, setMessage, setLike, favorites, setButton, setFavorites, setUserFeed } = useContext(FirestoreContext);
+    const { user, message, setMessage, setLike, favorites, setButton, setFavorites, setUserFeed, checkingLike } = useContext(FirestoreContext);
     const messageOrdered = favorites.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
     const history = useHistory();
 
@@ -54,7 +54,7 @@ function Selections() {
                         <p>{tweet.tweet}</p>
                       </div>
                     </div>
-                    <span className="span_img" onClick={() => likeTweet(tweet.id, tweet.likes, tweet.like, tweet.uid)}><img src={tweet.likes ? images('./like.svg').default : images('./nlike.svg').default} alt="" />{tweet.likes ? tweet.likes : 0}</span>
+                    <span className="span_img" onClick={() => likeTweet(tweet.id, tweet.likes, user.uid)}><img src={checkingLike(tweet.id, user.uid) === true ? images('./like.svg').default : images('./nlike.svg').default} alt="" />{tweet.likes ? tweet.likes : 0}</span>
                   </div>
                   <div className="delete_box">
                       {tweet.uid === user.uid ?
