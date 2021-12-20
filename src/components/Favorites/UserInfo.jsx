@@ -3,7 +3,7 @@ import { FirestoreContext } from '../../context/firestoreContext';
 import '../../styles/userinfo.css';
 
 function UserInfo() {
-  const { user, nickname, color, button, setButton, message, setFavorites } = useContext(FirestoreContext);
+  const { user, nickname, color, button, setButton, message, setFavorites, favoritesfeed } = useContext(FirestoreContext);
 
   const handleButtonPosts = (e) => {
     e.preventDefault();
@@ -15,7 +15,8 @@ function UserInfo() {
   const handleButtonFavorites = (e) => {
     e.preventDefault();
     setButton(true)
-    const messageFavorites = message.filter(({ like }) => like === true);
+    const messageFavorites = message.filter((favs) => favoritesfeed.some((fav) => fav.tweetlike.tweetid === favs.id && user.uid === fav.tweetlike.uid));
+    console.log(messageFavorites);
     setFavorites(messageFavorites);
   }
 
