@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { firestore } from '../../firebase/firebase';
 import { FirestoreContext } from '../../context/firestoreContext';
 import { useHistory } from "react-router-dom";
 import '../../styles/feed.css';
@@ -7,22 +6,9 @@ import '../../styles/feed.css';
 function Selections() {
     const images = require.context('../../../public/images', true);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const { user, message, setMessage, setLike, favorites, setButton, setFavorites, setUserFeed, checkingLike } = useContext(FirestoreContext);
+    const { user, message, favorites, setButton, setFavorites, setUserFeed, checkingLike, deleteTweet, likeTweet } = useContext(FirestoreContext);
     const messageOrdered = favorites.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
     const history = useHistory();
-
-    const deleteTweet = (id) => {
-        const newTweets = message.filter((tweet) => tweet.id !== id);
-        setMessage(newTweets);
-        firestore.doc(`tweets/${id}`).delete();
-    }
-    
-    const likeTweet = (id, numLikes, like, uid) => {
-        if ( !numLikes ) numLikes = 0;
-        firestore.doc(`tweets/${id}`).update({ like : !like });
-        setLike(like)
-        like === true ? firestore.doc(`tweets/${id}`).update({ likes : numLikes - 1 }) : firestore.doc(`tweets/${id}`).update({ likes : numLikes + 1 });
-    }
 
     useEffect(() => {
       setButton(false);

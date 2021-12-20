@@ -12,7 +12,7 @@ export default function FirestoreProvider({ children }) {
   const [userfeed, setUserFeed] = useState("");
   const [button, setButton] = useState(false);
   const [user, setUser] = useState(null);
-  const [like_, setLike] = useState({});
+  const [like_, setLike_] = useState({});
   const [tweet, setTweet] = useState({
     tweet: "",
     user: "",
@@ -59,20 +59,53 @@ export default function FirestoreProvider({ children }) {
   useEffect(() => {
     const unsuscribe = firestore.collection("usertweets")
     .onSnapshot((snapshot) => {
-      const favorites = snapshot.docs.map((doc) => {
+      const favorite = snapshot.docs.map((doc) => {
         return {
+          id: doc.id,
           tweetlike: doc.data().tweetlike
         };
       });
-      setFavoritesFeed(favorites);
+      setFavoritesFeed(favorite);
     });
   
     return () => unsuscribe();
   }, []);
 
-    const likeUserTweet = (usertweet) => {
-      let likeTweet = {
-       tweetlike: usertweet
+  const checkingLike = (id, uid) => {
+    let checklike = favoritesfeed.filter((favorites) => favorites.tweetlike.tweetid === id && favorites.tweetlike.uid === uid);
+    if (checklike.length === 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  const likeTweet = (id, numLikes, uid) => {
+    const usertweet = {
+      tweetid: id,
+      uid: uid
+    };
+
+    let checklike = favoritesfeed.find((favorite) => favorite.tweetlike.tweetid === id && favorite.tweetlike.uid === uid);
+
+    if (!numLikes) numLikes = 0;
+    if (!checklike) checklike = "";
+
+    if (checklike !== "") {
+      unlikeUserTweet(usertweet);
+      firestore.doc(`tweets/${id}`).update({ likes : numLikes - 1 });
+    } else
+    {
+      likeUserTweet(usertweet);
+      firestore.doc(`tweets/${id}`).update({ likes : numLikes + 1 });
+    };
+  }
+
+  const likeUserTweet = (usertweet) => {
+    let likeTweet = {
+      id: "",
+      tweetlike: usertweet
     };
 
     let send = firestore.collection("usertweets").add(likeTweet);
@@ -87,54 +120,10 @@ export default function FirestoreProvider({ children }) {
   }
 
   const unlikeUserTweet = (usertweet) => {
-    const unsuscribe = firestore.collection("usertweets")
-    .onSnapshot((snapshot) => {
-      const liketweet_ = snapshot.docs.map((doc) => {
-        return {
-          id: doc.id,
-          tweetlike: doc.data().tweetlike
-        };
-      });
-
-      const userlikefilter = liketweet_.filter((tweetsLiked) => tweetsLiked.tweetlike.tweetid === usertweet.tweetid && tweetsLiked.tweetlike.uid === usertweet.uid)
+      const userlikefilter = favoritesfeed.filter((tweetsLiked) => tweetsLiked.tweetlike.tweetid === usertweet.tweetid && tweetsLiked.tweetlike.uid === usertweet.uid)
       const uniqueid = userlikefilter[0];
-
-      const newTweets = liketweet_.filter((tweetli) => tweetli.tweetlike.tweetid !== usertweet.tweetid && tweetli.tweetlike.uid !== usertweet.uid);
-      setFavoritesFeed(newTweets);
-
-      try {
-        firestore.doc(`usertweets/${uniqueid.id}`).delete();
-      }
-      catch(e){
-        console.log(e.message);
-      }
-    });
-    
-    return () => unsuscribe();
-  }
-
-  const likeTweet = (id, numLikes, uid) => {
-    const usertweet = {
-      tweetid: id,
-      uid: uid
-    };
-    
-    let checklike = favoritesfeed.find(favorites => favorites.tweetlike.tweetid === id && favorites.tweetlike.uid === uid);
-
-    if (!numLikes) numLikes = 0;
-    if (!checklike) checklike = "";
-
-    setLike(checklike);
-
-    if (checklike !== "") {
-      unlikeUserTweet(usertweet);
-      firestore.doc(`tweets/${id}`).update({ likes : numLikes - 1 });
-    } else
-    {
-      likeUserTweet(usertweet);
-      firestore.doc(`tweets/${id}`).update({ likes : numLikes + 1 });
-    };
-  }
+      firestore.doc(`usertweets/${uniqueid.id}`).delete();
+  };
 
   const deleteTweet = (id) => {
     const newTweets = message.filter((tweet) => tweet.id !== id);
@@ -142,18 +131,8 @@ export default function FirestoreProvider({ children }) {
     firestore.doc(`tweets/${id}`).delete();
   }
 
-  const checkingLike = (id, uid) => {
-    let checklike = favoritesfeed.filter((favorites) => favorites.tweetlike.tweetid === id && favorites.tweetlike.uid === uid);
-    if (checklike.length === 0) {
-      return false;
-    }
-    else {
-      return true;
-    }
-  }
-
   return (
-    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike } }>
+    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike_, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike } }>
       {children}
     </FirestoreContext.Provider>
   );
