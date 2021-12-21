@@ -134,8 +134,10 @@ export default function FirestoreProvider({ children }) {
     firestore.doc(`tweets/${id}`).delete();
   }
 
+  const handleDelete = (id) => (window.confirm('Are you sure you wish to delete this item?') ? deleteTweet(id) : null);
+
   return (
-    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike_, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike, loading, setLoading } }>
+    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike_, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike, loading, setLoading, handleDelete } }>
       {children}
     </FirestoreContext.Provider>
   );

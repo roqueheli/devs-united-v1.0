@@ -55,6 +55,7 @@
 .delete_box button {
     border: none;
     background: transparent;
+    cursor: pointer;
 }
 
 .post__headerText {
@@ -99,4 +100,9 @@
     cursor: pointer;
     width: 1.1rem;
     margin-right: .4rem;
+}
+
+.post__headerDescription {
+    margin-top: .7rem;
+    font-size: 10px;
 }
