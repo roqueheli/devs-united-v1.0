@@ -7,9 +7,16 @@ import '../../styles/feed.css';
 function Selections() {
     const images = require.context('../../../public/images', true);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const { user, message, favorites, setButton, setFavorites, setUserFeed, checkingLike, handleDelete, likeTweet, setLoading, loading } = useContext(FirestoreContext);
-    const messageOrdered = favorites.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
+    const { user, message, favorites, button, setButton, setFavorites, setUserFeed, checkingLike, handleDelete, likeTweet, setLoading, loading } = useContext(FirestoreContext);
+    let messageOrdered = [];
     const history = useHistory();
+
+    if (button) {
+      messageOrdered = favorites.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
+    } else {
+      const messagePosts = message.filter(({ uid }) => uid === user.uid);
+      messageOrdered = messagePosts.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
+    }
 
     useEffect(() => {
       setButton(false);

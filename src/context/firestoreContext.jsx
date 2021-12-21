@@ -123,18 +123,24 @@ export default function FirestoreProvider({ children }) {
   }
 
   const unlikeUserTweet = (usertweet) => {
-      const userlikefilter = favoritesfeed.filter((tweetsLiked) => tweetsLiked.tweetlike.tweetid === usertweet.tweetid && tweetsLiked.tweetlike.uid === usertweet.uid)
+      const userlikefilter = favoritesfeed.filter((tweetsLiked) => tweetsLiked.tweetlike.tweetid === usertweet.tweetid && tweetsLiked.tweetlike.uid === usertweet.uid);
       const uniqueid = userlikefilter[0];
       firestore.doc(`usertweets/${uniqueid.id}`).delete();
   };
 
   const deleteTweet = (id) => {
+    const tweetlike__ = message.filter((tweet) => tweet.id === id);
     const newTweets = message.filter((tweet) => tweet.id !== id);
     setMessage(newTweets);
     firestore.doc(`tweets/${id}`).delete();
+    const userlikefilter = favoritesfeed.filter((tweetsLiked) => tweetlike__.some((fav) => fav.id === tweetsLiked.tweetlike.tweetid && tweetsLiked.tweetlike.uid === fav.uid));
+    if (userlikefilter.length > 0) {
+      const uniqueid = userlikefilter[0];
+      firestore.doc(`usertweets/${uniqueid.id}`).delete();
+    }
   }
 
-  const handleDelete = (id) => (window.confirm('Are you sure you wish to delete this item?') ? deleteTweet(id) : null);
+  const handleDelete = (id) => window.confirm('Are you sure you wish to delete this item?') ? deleteTweet(id) : null;
 
   return (
     <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike_, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike, loading, setLoading, handleDelete } }>
