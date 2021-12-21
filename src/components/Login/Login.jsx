@@ -33,6 +33,7 @@ function Login() {
                     {user ? (
                         <>
                             <h1 className="logged_welcome">{`WELCOME `} <span>{user.displayName}</span></h1>
+                            <p className="logged_email" style={{ color: color.hex }}>{user.email}</p>
                             <input onChange={handleNickNameChange} type="text" name="nickname" id="nickname" placeholder="Type your username"/>
                             <p className="select_color">Select your favorite color</p>
                             <div className="color_box">

@@ -40,6 +40,12 @@ body {
     line-height: 3.125rem;
 }
 
+.login .logged_email {
+    padding-left: .4rem;
+    font-family: Silkscreen;
+    font-size: .7rem;
+}
+
 .login .login_p {
     font-family: 'Fira Code';
     font-weight: normal;
