@@ -4,6 +4,7 @@ import { firestore, auth } from '../firebase/firebase';
 export const FirestoreContext = createContext();
 
 export default function FirestoreProvider({ children }) {
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [favoritesfeed, setFavoritesFeed] = useState([]);
@@ -47,6 +48,7 @@ export default function FirestoreProvider({ children }) {
         };
       });
       setMessage(tweets);
+      setLoading(true);
     });
 
     auth.onAuthStateChanged((user) => {
@@ -66,6 +68,7 @@ export default function FirestoreProvider({ children }) {
         };
       });
       setFavoritesFeed(favorite);
+      setLoading(true);
     });
   
     return () => unsuscribe();
@@ -132,7 +135,7 @@ export default function FirestoreProvider({ children }) {
   }
 
   return (
-    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike_, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike } }>
+    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike_, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike, loading, setLoading } }>
       {children}
     </FirestoreContext.Provider>
   );
