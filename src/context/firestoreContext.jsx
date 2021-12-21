@@ -132,6 +132,8 @@ export default function FirestoreProvider({ children }) {
     const tweetlike__ = message.filter((tweet) => tweet.id === id);
     const newTweets = message.filter((tweet) => tweet.id !== id);
     setMessage(newTweets);
+    const newFavorites = favorites.filter((tweet) => tweet.id !== id);
+    setFavorites(newFavorites);
     firestore.doc(`tweets/${id}`).delete();
     const userlikefilter = favoritesfeed.filter((tweetsLiked) => tweetlike__.some((fav) => fav.id === tweetsLiked.tweetlike.tweetid && tweetsLiked.tweetlike.uid === fav.uid));
     if (userlikefilter.length > 0) {
