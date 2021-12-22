@@ -16,7 +16,6 @@ function UserInfo() {
     e.preventDefault();
     setButton(true)
     const messageFavorites = message.filter((favs) => favoritesfeed.some((fav) => fav.tweetlike.tweetid === favs.id && user.uid === fav.tweetlike.uid));
-    console.log(messageFavorites);
     setFavorites(messageFavorites);
   }
 
