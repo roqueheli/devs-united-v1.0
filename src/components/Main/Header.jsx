@@ -29,7 +29,7 @@ function Header() {
                 <img onClick={handleBack} src={images('./back.svg').default} alt="" />
             </div>
             <div className="header_container">
-                <img onClick={() => history.push('/favorites')} className="header_avatar" style={{ border: `2px solid ${color.hex}`}} src={user.photoURL} alt="" />
+                <img onClick={() => history.push('/favorites')} className="header_avatar" style={{ border: `2px solid ${color.hex}`}} src={user ? user.photoURL : localStorage.getItem('userPhotoURL')} alt="" />
                 <img src={images('./logo_small.svg').default} alt="" />
                 <img className="header_title" src={images('./title.svg').default} alt="" />
             </div>

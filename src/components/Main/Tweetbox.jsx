@@ -63,7 +63,7 @@ function Tweet() {
           <form>
             <div className="tweetbox__input">
                 <div className="tweetbox_avatar">
-                    <img src={user.photoURL} alt="" />
+                    <img src={user ? user.photoURL : localStorage.getItem('userPhotoURL')} alt="" />
                 </div>
                 <div className="tweetbox_textarea">
                     <textarea name="tweet" onChange={handleTweet} placeholder="What's happening?" value={tweet.tweet} maxLength="200" />

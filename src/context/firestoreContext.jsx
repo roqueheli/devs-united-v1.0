@@ -27,7 +27,7 @@ export default function FirestoreProvider({ children }) {
     date: new Date(),
     timeStamp: new Date()
   });
-  
+
   useEffect(() => {
     const unsuscribe = firestore.collection("tweets")
     .onSnapshot((snapshot) => {
@@ -53,6 +53,11 @@ export default function FirestoreProvider({ children }) {
 
     auth.onAuthStateChanged((user) => {
       setUser(user);
+      try {
+        localStorage.setItem('userPhotoURL', user.photoURL);
+      } catch (e) {
+        
+      };
     });
   
     return () => unsuscribe();
@@ -73,6 +78,14 @@ export default function FirestoreProvider({ children }) {
   
     return () => unsuscribe();
   }, []);
+
+  const tweetsToDelete = favoritesfeed.filter((tweetsLiked) => !message.some((fav) => fav.id === tweetsLiked.tweetlike.tweetid));
+  useEffect(() => {
+    tweetsToDelete.map((erase) => {
+      firestore.doc(`usertweets/${erase.id}`).delete();
+      return erase;
+    });
+  }, [tweetsToDelete]);
 
   const checkingLike = (id, uid) => {
     let checklike = favoritesfeed.filter((favorites) => favorites.tweetlike.tweetid === id && favorites.tweetlike.uid === uid);

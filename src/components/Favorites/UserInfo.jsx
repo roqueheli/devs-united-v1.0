@@ -23,7 +23,7 @@ function UserInfo() {
   return (
     <nav className="tweetBox">
       <div className="tweetbox__">
-        <img style={{ border: `2px solid ${color.hex}`}} src={user.photoURL} alt="" />
+        <img style={{ border: `2px solid ${color.hex}`}} src={user ? user.photoURL : localStorage.getItem('userPhotoURL')} alt="" />
         <h3 style={{ background: `${color.hex}`}}>{nickname.toLowerCase()}</h3>
       </div>
       <div className="userinfo_">

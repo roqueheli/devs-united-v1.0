@@ -19,8 +19,8 @@ function Selections() {
     }
 
     useEffect(() => {
-      setButton(false);
       const messagePosts = message.filter(({ uid }) => uid === user.uid);
+      setButton(false);
       setFavorites(messagePosts);
       setLoading(true);
     }, []);
@@ -67,7 +67,7 @@ function Selections() {
     };
 
     return (
-      !loading ? <Loading /> : <MainSelections />
+      user && !loading ? <Loading /> : <MainSelections />
     )
 }
 
