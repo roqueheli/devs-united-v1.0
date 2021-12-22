@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { FirestoreContext } from '../../context/firestoreContext';
-import Loading from '../Loader/Loading';
 import '../../styles/feed.css';
 
 function UserFeed() {
     const images = require.context('../../../public/images', true);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const { user, message, checkingLike, userfeed, likeTweet, handleDelete, loading } = useContext(FirestoreContext);
+    const { user, message, checkingLike, userfeed, likeTweet, handleDelete } = useContext(FirestoreContext);
     const userPosts = message.filter(({ uid }) => uid === userfeed.uid);
     const messageOrdered = userPosts.sort((a, b) => (b.timeStamp.toDate() - a.timeStamp.toDate()));
 
@@ -31,7 +30,7 @@ function UserFeed() {
                       <p className="post__headerDescription">{tweet.email}</p>
                     </div>
                   </div>
-                  <span className="span_img" onClick={() => likeTweet(tweet.id, tweet.likes, tweet.uid)}><img src={checkingLike(tweet.id, user.uid) === true ? images('./like.svg').default : images('./nlike.svg').default} alt="" />{tweet.likes ? tweet.likes : 0}</span>
+                  <span className="span_img" onClick={() => likeTweet(tweet.id, tweet.likes, user.uid)}><img src={checkingLike(tweet.id, user.uid) === true ? images('./like.svg').default : images('./nlike.svg').default} alt="" />{tweet.likes ? tweet.likes : 0}</span>
                 </div>
                 <div className="delete_box">
                     {tweet.uid === user.uid ?
@@ -47,7 +46,7 @@ function UserFeed() {
     };
 
     return (
-      !loading ? <Loading /> : <MainUserFeed />
+      <MainUserFeed />
     )
 }
 

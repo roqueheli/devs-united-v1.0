@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { FirestoreContext } from '../../context/firestoreContext';
 import { useHistory } from "react-router-dom";
-import Loading from '../Loader/Loading';
 import '../../styles/feed.css';
 
 function Selections() {
     const images = require.context('../../../public/images', true);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const { user, message, favorites, button, setButton, setFavorites, setUserFeed, checkingLike, handleDelete, likeTweet, setLoading, loading } = useContext(FirestoreContext);
+    const { user, message, favorites, button, setButton, setFavorites, setUserFeed, checkingLike, handleDelete, likeTweet, setLoading } = useContext(FirestoreContext);
     let messageOrdered = [];
     const history = useHistory();
 
@@ -67,7 +66,7 @@ function Selections() {
     };
 
     return (
-      user && !loading ? <Loading /> : <MainSelections />
+      <MainSelections />
     )
 }
 

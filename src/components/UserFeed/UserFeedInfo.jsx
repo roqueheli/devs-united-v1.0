@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { FirestoreContext } from '../../context/firestoreContext';
 import '../../styles/userinfo.css';
 
-function UserInfo() {
+function UserFeedInfo() {
   const { userfeed } = useContext(FirestoreContext);
 
   return (
@@ -15,4 +15,4 @@ function UserInfo() {
     )
 }
 
-export default UserInfo;
+export default UserFeedInfo;
