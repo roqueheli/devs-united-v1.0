@@ -1,14 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     width: 100%;
     height: 100vh;
     background: #2E132C;
-    /* overflow: hidden; */
 }
 
 .login_container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
 }
 
@@ -21,6 +26,13 @@ body {
     width: 50%;
     height: 100vh;
     overflow: hidden;
+}
+
+.left img:hover {
+    -webkit-transform-origin-x: 50%;
+    -webkit-transform-origin-y: 50%;
+    transform: perspective(110px) rotateY(360deg);
+    transition: all 3.5s linear;
 }
 
 .login h1,
