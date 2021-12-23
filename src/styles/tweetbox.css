@@ -15,6 +15,10 @@ form {
     justify-content: space-between;
     width: 34%;
 }
+  
+textarea:focus {
+      outline: 0;
+}
 
 .tweetbox__input {
     display: flex;
