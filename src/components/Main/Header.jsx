@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { FirestoreContext } from '../../context/firestoreContext';
-import { logout } from '../../firebase/firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
@@ -8,14 +7,8 @@ import '../../styles/header.css';
 
 function Header() {
     const images = require.context('../../../public/images', true);
-    const { user, color, setColor } = useContext(FirestoreContext);
+    const { user, color, setColor, handleLogout } = useContext(FirestoreContext);
     const history = useHistory();
-
-    const handleLogout = (e) => {
-        e.preventDefault();
-        logout();
-        history.push('/');
-    }
 
     const handleBack = (e) => {
         e.preventDefault();

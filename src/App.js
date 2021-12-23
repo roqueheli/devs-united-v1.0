@@ -3,29 +3,29 @@ import Main from './components/Main/Main';
 import NotFound from './components/Main/NotFound';
 import Favorites from './components/Favorites/Favorites';
 import MainUserFeed from './components/UserFeed/MainUserFeed';
-import { AnimatedRoutes, RouteTransition } from './animation/Animation';
+import { Route, Switch } from 'react-router-dom';
 import './styles/App.css';
 
 function App() {
   return (
     <>
-      <AnimatedRoutes exitBeforeEnter initial={false}>
-        <RouteTransition exact path="/">
+      <Switch>
+        <Route exact path="/">
           <Login />
-        </RouteTransition>
-        <RouteTransition exact path="/main">
+        </Route>
+        <Route path="/main">
           <Main />
-        </RouteTransition>
-        <RouteTransition exact path="/favorites">
+        </Route>
+        <Route path="/favorites">
           <Favorites />
-        </RouteTransition>
-        <RouteTransition exact path="/userfeed">
+        </Route>
+        <Route path="/userfeed">
           <MainUserFeed />
-        </RouteTransition>
-        <RouteTransition path="/">
+        </Route>
+        <Route path="/">
           <NotFound />
-        </RouteTransition>
-      </AnimatedRoutes>
+        </Route>
+      </Switch>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
-import { firestore, auth } from '../firebase/firebase';
+import { firestore, auth, logout } from '../firebase/firebase';
+import { useHistory } from "react-router-dom";
 
 export const FirestoreContext = createContext();
 
@@ -27,6 +28,7 @@ export default function FirestoreProvider({ children }) {
     date: new Date(),
     timeStamp: new Date()
   });
+  const history = useHistory();
 
   useEffect(() => {
     const unsuscribe = firestore.collection("tweets")
@@ -159,8 +161,15 @@ export default function FirestoreProvider({ children }) {
 
   const handleDelete = (id) => window.confirm('Are you sure you wish to delete this item?') ? deleteTweet(id) : null;
 
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    setColor("");
+    history.push('/');
+  }
+
   return (
-    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike_, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike, loading, setLoading, handleDelete } }>
+    <FirestoreContext.Provider value={ { message, setMessage, user, setUser, tweet, setTweet, color, setColor, nickname, setNickname, like_, setLike_, button, setButton, favorites, setFavorites, userfeed, setUserFeed, favoritesfeed, setFavoritesFeed, likeUserTweet, unlikeUserTweet, likeTweet, deleteTweet, checkingLike, loading, setLoading, handleDelete, handleLogout } }>
       {children}
     </FirestoreContext.Provider>
   );

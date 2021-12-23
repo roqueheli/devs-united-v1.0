@@ -17,7 +17,7 @@ export const RouteTransition: React.FC<Props> = ({
   slideUp = 0,
   ...rest
 }) => (
-  <Route exact={exact} path="/admang/service-center" {...rest}>
+  <Route path="/admang/service-center" {...rest}>
     <MountTransition slide={slide} slideUp={slideUp}>
       {children}
     </MountTransition>
@@ -34,7 +34,7 @@ export const AnimatedRoutes: React.FC<RoutesProps> = ({
   exitBeforeEnter = true,
   initial = false,
 }) => {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <AnimatePresence exitBeforeEnter={exitBeforeEnter} initial={initial}>
       <Switch location={location} key={location.pathname}>
